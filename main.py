@@ -6,7 +6,7 @@ from tracking_module import HandDetector
 BRUSH_COLOR = (255, 0, 0)
 BRUSH_THICKNESS = {
     0: 75,
-    1: 15
+    1: 10
 }
 
 
@@ -17,6 +17,7 @@ def main(brush_color: tuple = BRUSH_COLOR,
     xp, yp = 0, 0
     draw_color = brush_color
     header = cv2.imread('images/header.png')
+    h_size = header.shape[0]
     img_canvas = np.ones((720, 1280, 3)) * 255
 
     cap = cv2.VideoCapture(0)
@@ -41,7 +42,7 @@ def main(brush_color: tuple = BRUSH_COLOR,
             # режим выбора
             if fingers[1] and fingers[2]:
                 xp, yp = 0, 0
-                if y1 < 216:
+                if y1 < h_size:
                     if 0 < x1 < 640:
                         draw_color = brush_color
                         flag = True
@@ -64,7 +65,7 @@ def main(brush_color: tuple = BRUSH_COLOR,
                     )
                 xp, yp, = x1, y1
 
-        img[:216, :] = header
+        img[:h_size, :] = header
 
         cv2.imshow('Canvas', img_canvas)
         cv2.imshow('Camera', img)
