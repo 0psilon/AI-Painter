@@ -1,5 +1,7 @@
 # AI-painter
 
+Python 3.9.16:
+
 ```
 pip install -r requirements.txt
 ```
